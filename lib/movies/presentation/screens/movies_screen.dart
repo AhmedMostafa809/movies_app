@@ -9,7 +9,7 @@ import 'package:movies_app/core/services/services_locator.dart';
 import 'package:movies_app/movies/presentation/controller/movies_bloc.dart';
 import 'package:movies_app/movies/presentation/controller/movies_event.dart';
 import 'package:movies_app/movies/presentation/controller/movies_state.dart';
-import 'package:movies_app/movies/presentation/screens/dummy.dart';
+import 'package:movies_app/movies/presentation/screens/movie_detail_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MainMoviesScreen extends StatelessWidget {
@@ -42,7 +42,15 @@ class MainMoviesScreen extends StatelessWidget {
                         (item) {
                           return GestureDetector(
                             key: const Key('openMovieMinimalDetail'),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MovieDetailScreen(id: item.id),
+                                ),
+                              );
+                            },
                             child: Stack(
                               children: [
                                 ShaderMask(
@@ -170,7 +178,15 @@ class MainMoviesScreen extends StatelessWidget {
                           return Container(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        MovieDetailScreen(id: movie.id),
+                                  ),
+                                ) ;
+                              },
                               child: ClipRRect(
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0)),
@@ -178,7 +194,7 @@ class MainMoviesScreen extends StatelessWidget {
                                   width: 120.0,
                                   fit: BoxFit.cover,
                                   imageUrl: ApiConstants.imageUrl(
-                                      movie.backdropPath!),
+                                      movie.backdropPath),
                                   placeholder: (context, url) =>
                                       Shimmer.fromColors(
                                     baseColor: Colors.grey[850]!,
@@ -260,6 +276,13 @@ class MainMoviesScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: InkWell(
                               onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        MovieDetailScreen(id: movie.id),
+                                  ),
+                                );
                                 /// TODO : NAVIGATE TO  MOVIE DETAILS
                               },
                               child: ClipRRect(
@@ -269,7 +292,7 @@ class MainMoviesScreen extends StatelessWidget {
                                   width: 120.0,
                                   fit: BoxFit.cover,
                                   imageUrl: ApiConstants.imageUrl(
-                                      movie.backdropPath!),
+                                      movie.backdropPath),
                                   placeholder: (context, url) =>
                                       Shimmer.fromColors(
                                     baseColor: Colors.grey[850]!,
